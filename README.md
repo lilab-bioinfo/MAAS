@@ -74,10 +74,6 @@ ggplot(umap.axis, aes(`UMAP-1`, `UMAP-2`))+
 
 Documentation and tutorials (full data preparation and integration) can be found at <https://larrycpan.github.io/MAAS/>. The example data (cell similarity) has been uploaded to the folder example.data, which can be used for the `MAAS` function directly.
 
-We provide the source code of SNV calling and MAAS in the github repository, including peak adjusting and multimodal integration.
-To perform SNV RPCA analysis, you should install [Matlab](https://www.mathworks.com/products/matlab.html) in advance, which always finishes in a few seconds. 
-This step is optional for users that raw SNV matrix is also adopted by MAAS.
-
 In addition, we highly recommend installing [openBLAS](https://github.com/OpenMathLib/OpenBLAS) to speed matrix operations, before starting your MAAS analysis.
 
 ### Getting help
