@@ -6,7 +6,7 @@ Single-cell multimodal analysis enables highly accurate delineation of clinicall
 
 
 
-<img src="https://github.com/Larrycpan/MAAS/blob/main/vignettes/Overview.png" alt="Flowchart" style="width: 70%">
+<img src="https://www.helloimg.com/i/2025/02/25/67bd7daf362ae.png" alt="Flowchart" style="width: 70%">
 
 <p align="center">
 
@@ -69,7 +69,7 @@ ggplot(umap.axis, aes(`UMAP-1`, `UMAP-2`))+
 ```
 
 <p align="center">
-<img src="http://bioinfo.szbl.ac.cn/share/MAAS_data/HCC.MAAS.cluster.umap.png" alt="Flowchart" style="width: 40%">
+<img src="https://www.helloimg.com/i/2025/02/25/67bd7d0396425.png" alt="Flowchart" style="width: 40%">
 </p>
 
 Documentation and tutorials (full data preparation and integration) can be found at <https://larrycpan.github.io/MAAS/>. The example data (cell similarity) has been uploaded to the folder example.data, which can be used for the `MAAS` function directly.
