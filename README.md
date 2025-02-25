@@ -6,7 +6,7 @@ Single-cell multimodal analysis enables highly accurate delineation of clinicall
 
 
 
-<img src="https://www.helloimg.com/i/2025/02/25/67bd7daf362ae.png" alt="Flowchart" style="width: 70%">
+<img src="https://bioinfo.szbl.ac.cn/share/MAAS_data/Figure 1.png" alt="Flowchart" style="width: 70%">
 
 <p align="center">
 
@@ -28,7 +28,7 @@ saveRDS(maas.test, "maas.res.all.rds")
 #### Determine the optimal clustering strategy
 maas.res <- readRDS("maas.res.test.rds")
 barcode.list <- rownames(data$Peak)
-set.seed(1
+set.seed(1)
 
 #### Using the optimal clustering strategy
 clusPerformance <- data.frame(matrix(nrow = length(maas.res)-1, ncol = 5),
