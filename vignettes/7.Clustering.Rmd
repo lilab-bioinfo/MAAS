@@ -34,10 +34,9 @@ my_color <- c("#5050FF", "#CE3D32", "#749B58", "#F0E685", "#00BFC4", "#B79F00", 
 #### Determine the optimal clustering strategy
 ```{r, message=FALSE, warning=FALSE, eval=FALSE}
 # Load MAAS results
-maas.res <- readRDS("../6.MAAS/maas.res.test.rds")
-barcode.list <- readRDS("../6.MAAS/share.barcode.rds")
+maas.res <- readRDS("../7.MAAS_running/maas.res.all.rds")
+barcode.list <- readRDS("../7.MAAS_running/share.barcode.rds")
 set.seed(1)
-barcode.list <- sample(barcode.list, 400)
 ```
 
 #### Using the optimal clustering strategy
@@ -55,15 +54,15 @@ for(i in 1:(length(maas.res)-1)){
 }
 
 # Re-running clustering with the optimal performance
-df <- as.data.frame(maas.res[[4]]$W)
+df <- as.data.frame(maas.res[[1]]$W)
 rownames(df) <- barcode.list
 maas.clu <- data.frame(Cluster = withr::with_seed(2, kmeans(df, centers = 2)$cluster))
 maas.clu$Cluster <- as.factor(maas.clu$Cluster)
-saveRDS(ataclone.clu, "example.MAAS.clu.rds")
+saveRDS(maas.clu, "example.MAAS.clu.rds")
 
 ## Visualization
 umap.axis <- withr::with_seed(2, uwot::umap(df, n_neighbors = 50, metric = "manhattan", min_dist = 0.1, n_threads = 30))
-umap.axis <- as.data.frame(umap.axis); umap.axis$Cluster <- ataclone.clu$Cluster
+umap.axis <- as.data.frame(umap.axis); umap.axis$Cluster <- maas.clu$Cluster
 colnames(umap.axis) <- c("UMAP-1", "UMAP-2", "Cluster")
 ggplot(umap.axis, aes(`UMAP-1`, `UMAP-2`))+
   geom_point(aes(color = Cluster), size = 1.75)+
@@ -74,8 +73,22 @@ ggplot(umap.axis, aes(`UMAP-1`, `UMAP-2`))+
         axis.title = element_text(size = 14),
         axis.text = element_blank(),
         legend.text = element_text(size = 12))
+# Since there are only two latent factors in this case, we do not perform UMAP analysis.
+# If there multiple MAAS features (>= 3), you are suggested to run the code below for visualization
+# umap.axis <- withr::with_seed(2, uwot::umap(df, n_neighbors = 30, metric = "cosine", n_threads = 30))
+# umap.axis <- as.data.frame(umap.axis); umap.axis$Cluster <- maas.clu$Cluster
+# colnames(umap.axis) <- c("UMAP-1", "UMAP-2", "Cluster")
+# ggplot(umap.axis, aes(`UMAP-1`, `UMAP-2`))+
+#   geom_point(aes(color = Cluster), size = 1.75)+
+#   # scale_color_manual(values = my_color)+
+#   theme_dr()+
+#   labs(x = "UMAP-1", y = "UMAP-2")+
+#   theme(panel.grid = element_blank(),
+#         axis.title = element_text(size = 14),
+#         axis.text = element_blank(),
+#         legend.text = element_text(size = 12))
 ```
 
 ```{r, HCC.MAAS.cluster.umap.png, fig.align = 'center', fig.height = 4, fig.width = 5, out.height = "25%", out.width = "30%", echo=FALSE}
-knitr::include_graphics("https://vip.helloimg.com/i/2024/08/23/66c7f415d4f23.png")
+knitr::include_graphics("https://www.helloimg.com/i/2025/02/25/67bd7d0396425.png")
 ```

@@ -19,25 +19,36 @@ knitr::opts_chunk$set(
 options(rmarkdown.html_vignette.check_title = FALSE)
 ```
 
-We adapt the script made by [Z chen et al.](https://github.com/ucasdp/RobustClone) of robust PCA (RPCA) for mutation data analysis, and thanks for their contributions. \
+We have conducted benchmark of several SNV denoising tools designed for single-cell data, and found that CBM show superior performance (please refer to our paper for more details). Users should install and run [CBM](https://github.com/zhyu-lab/cbm) before running MAAS. \
 
-One should put all Matlab scripts in the same folder, and execute the `main.m` for their own data.
+In this tutorial, CBM has been installed in `~/App/cbm-main`.
 
 ```{octave, message=FALSE, warning=FALSE, eval=FALSE}
-clear
- 
-D=csvread('./example.snv.csv',1,1);
-D=D'
+library(dplyr)
+library(data.table)
+library(stringr)
 
-[m,n]=size(D); 
-ms=0; % value represents missing.
-omega=find(D~=ms); 
-omegaC=find(D==ms);
-lambda=1/sqrt(max(m,n))*(1+5*length(omegaC)/(m*n));
-[A1,E1]= RPCA(D,omega,lambda);
+#
+input_file <- "../6.snvcorrection/snv.CBMinput.txt"
+# sample.tmp <- gsub("\\.snv\\.CBMinput\\.txt", "", file.tmp)
+output_file <- "./"
+cmd <- paste("~/App/cbm-main/bin/cbm -i", input_file, "-o", output_file, "-K 10")
+system(cmd)
 
-%% Integralization
-AA1=int8(A1);
-AA1=table(AA1)
-writetable(AA1, 'example.mut1.csv');
+#
+pred.cluster.genotype <- as.data.frame(fread(".clones.txt"))
+rownames(pred.cluster.genotype) <- 0:(nrow(pred.cluster.genotype)-1)
+pred.cluster.label <- fread(".assignment.txt")
+pred.cluster.label <- as.data.frame(t(pred.cluster.label))
+colnames(pred.cluster.label) <- "Cluster"
+
+pred <- do.call(rbind, lapply(pred.cluster.label$Cluster, function(cluster) {
+  pred.cluster.genotype[as.character(cluster), ]
+}))
+
+raw.snv <- readRDS("snv.mat.rds")
+rownames(pred) <- colnames(raw.snv)
+colnames(pred) <- rownames(raw.snv)
+saveRDS(pred, "denoised.mat.rds")
+
 ```

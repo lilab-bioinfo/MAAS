@@ -55,6 +55,7 @@ gsvaResult1 <- gsvaResult[sameSample,,drop=F]
 cluster <- cluster[sameSample,,drop=F]
 gsvaCluster <- cbind(gsvaResult1, Cluster = cluster$Cluster)
 
+# In this case, we perform a very simple wilcoxon rank-sum test to identify differnetially enriched hallmarks.
 test.res <- data.frame()
 for(i in 1:(ncol(gsvaCluster)-1)){
   
@@ -95,5 +96,5 @@ draw(p, heatmap_legend_side="bottom")
 ```
 
 ```{r, maas.hallmark.png, fig.align = 'center', fig.height = 4, fig.width = 5, out.height = "35%", out.width = "50%", echo=FALSE}
-knitr::include_graphics("https://vip.helloimg.com/i/2024/08/23/66c7f410a0c90.png")
+knitr::include_graphics("https://www.helloimg.com/i/2025/02/25/67bd7ef571ee7.png")
 ```

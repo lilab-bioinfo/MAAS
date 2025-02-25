@@ -20,6 +20,7 @@ options(rmarkdown.html_vignette.check_title = FALSE)
 ```
 
 We used [SComatic](https://github.com/cortes-ciriano-lab/SComatic) to obtain SNV profile of tumor cells from scATAC-seq data.
+For more details, please refer to https://github.com/cortes-ciriano-lab/SComatic.
 
 ```{r "SComatic calling", message=FALSE, warning=FALSE, eval=FALSE}
 # Create a directory for SNV calling in the terminal
@@ -149,36 +150,70 @@ done
 ```
 
 After running the pipeling of SComatic, we can generate a cell-by-SNV matrix for MAAS integration as follows.
+This step will keep cells with favorable callable sites and remove low-quality mutations.
+
 ```{r "SNV matrix", message=FALSE, warning=FALSE, eval=FALSE}
 rm(list = ls())
+library(foreach)
+library(tibble)
 library(data.table)
 library(dplyr)
-library(tibble)
+library(stringr)
 library(reshape2)
 
-genotype <- fread("step6_SingleCellAlleles/Tumor.single_cell_genotype.tsv")
+genotype <- fread("../4.SNV_calling/step6_SingleCellAlleles/Tumor.single_cell_genotype.tsv")
 colnames(genotype)[1] <- "chr"
-genotype1 <- genotype %>% dplyr::filter(Num_reads > 2 & grepl("^chr", chr) & genotype$ALT_expected != ".")
+genotype1 <- genotype %>% dplyr::filter(Num_reads >= 3 & grepl("^chr", chr) & genotype$ALT_expected != ".")
+
 
 genotype1 <- genotype1 %>%
-  dplyr::mutate(genotype = ifelse(Base_observed == str_extract(ALT_expected, "^[^,]+") & (Cell_type_observed %in% Cell_type_expected), 1, 0))
+  dplyr::mutate(genotype = ifelse(
+    str_detect(ALT_expected, "\\|") & 
+      str_detect(Base_observed, ALT_expected) & 
+      (Cell_type_observed %in% Cell_type_expected), 
+    1, 
+    ifelse(
+      Base_observed == str_extract(ALT_expected, "^[^,]+") & 
+        (Cell_type_observed %in% Cell_type_expected), 
+      1, 
+      0
+    )
+  ))
 genotype1$pos <- paste0(genotype1$chr, ":", genotype1$Start, ":", genotype1$REF, ">", str_extract(genotype1$ALT_expected, "^[^,]+"))
 
-snv <- dcast(genotype1[,c("CB", "pos", "genotype")], pos ~ CB, drop = FALSE)
+# Filter cells with callable sites less than 2000
+callable.site <- fread("../4.SNV_calling/step5_UniqueCellCallableSites/example.Tumor.SitesPerCell.tsv")
+callable.site <- callable.site[callable.site$SitesPerCell > 10000,] ## Require cells with at least 10,000 callable sites
+genotype1 <- genotype1[genotype1$CB %in% callable.site$CB,]
+genotype1 <- genotype1 %>% group_by(pos) %>% dplyr::filter(n() >= 20) %>% ungroup() # Maintain SNVs in at least 20 tumor cells
+
+snv <- dcast(genotype1[,c("CB", "pos", "genotype")], pos ~ CB, fill = 0, drop = FALSE)
 snv <- column_to_rownames(snv, var = colnames(snv)[1])
-snv1 <- snv[apply(snv, 1, sum) >= 10,]   # Maintain SNVs in at least 10 tumor cells
-# saveRDS(snv1, "snv.mat.rds")
-write.csv(snv1, "example.snv.csv")
+snv[snv > 1] <- 1
+# saveRDS(snv, "snv.mat.raw.rds")
+
+#################################################################################
+# Generate matrix for SNV denoising
+x <- readRDS("snv.mat.raw.rds")
+x <- x[!grepl("chrM", rownames(x)),] # Remove SNVs in chrM
+saveRDS(x, "snv.mat.rds")
+write.table(t(x), "snv.CBMinput.txt", sep = "\t", quote = F, row.names = F, col.names = F)
 ```
 
 ```{r, message=FALSE, warning=FALSE, include=FALSE}
-temp1 <- tempfile(fileext=".zip")
-download.file("http://bioinfo.szbl.ac.cn/share/MAAS_data/snv1.RData.zip", temp1)
-load(unz(temp1, "snv1.RData"))
-close(file(temp1))
+# temp1 <- tempfile(fileext=".gz")
+# download.file("http://bioinfo.szbl.ac.cn/share/MAAS_data/snv.mat.raw.RData.gz", temp1)
+# load(unz(temp1, "snv.mat.raw.RData"))
+# close(file(temp1))
+# rm(temp1)
+temp1 <- tempfile(fileext = ".gz")
+download.file("http://bioinfo.szbl.ac.cn/share/MAAS_data/snv.mat.raw.RData.gz", temp1)
+snv <- gzfile(temp1, "rb")
+load(snv)
+# close(snv)
 rm(temp1)
 ```
 
 ```{r "head SNV", message=F, warning=FALSE}
-snv1[1:5,1:5]
+snv[1:5,1:5]
 ```
