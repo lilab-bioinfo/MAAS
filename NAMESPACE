@@ -1,0 +1,7 @@
+export(MAAS)
+export(adjustPeak)
+export(intersectRegions)
+export(clusteringMetric)
+exportPattern("^[[:alpha:]]+")
+useDynLib(MAAS, .registration=TRUE)
+importFrom(Rcpp, evalCpp)
