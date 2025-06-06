@@ -100,3 +100,4 @@ you can open a [Discussions](https://github.com/Larrycpan/MAAS/discussions).
 -  [Signac](https://stuartlab.org/signac/)
 -  [epiAneufinder](https://github.com/colomemaria/epiAneufinder)
 -  [SComatic](https://github.com/cortes-ciriano-lab/SComatic)
+-  [CBM] (https://github.com/zhyu-lab/cbm)
