@@ -1,23 +1,24 @@
 Package: MAAS
-Title: Single-cell multimodal analysis enables highly accurate delineation of clinically relevant tumor cell subpopulations
+Title: Multi-omics Association Analysis via Simultaneous non-negative matrix factorization
 Version: 1.0.0
-Authors@R: c(
-    person(given = "Kewei", family = "Xiong",        email = "kxiongac@connect.ust.hk",   role  = c("aut","cre")),
-    person(given = "Ruofan", family = "Ding",        email = "dingruofan1@foxmail.com",   role  = c("aut", "cre")),
-    person(given = "Lei", family = "Li",        email = "lei.li@szbl.ac.cn",   role  = c("aut","ctb", "cph"))
-	)
-URL: https://github.com/Larrycpan/MAAS/
-BugReports: https://github.com/Larrycpan/MAAS/issues
-License: GPL (>= 3)
+Authors@R: 
+    person("Kewei", "Xiong", email = "kxiongac@connect.ust.hk", role = c("aut", "cre"))
+Description: Implements the MAAS algorithm for multimodal intergration of tumor scATAC-seq data
+License: GPL-3
+Depends:
+    R (>= 3.6.0)
+Imports:
+    Rcpp (>= 1.0.8),
+    RcppArmadillo (>= 0.10.0),
+    clusterSim,
+    parallelDist,
+    fpc,
+    clValid
+LinkingTo: 
+    Rcpp,
+    RcppArmadillo
+Suggests:
+    testthat
 Encoding: UTF-8
 LazyData: true
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
-Depends: 
-    R (>= 3.6)
-VignetteBuilder:
-    knitr
-Imports: 
-    Rcpp
-    Seurat
-    Signac
+RoxygenNote: 7.3.2
