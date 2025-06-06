@@ -97,7 +97,7 @@ you can open a [Discussions](https://github.com/Larrycpan/MAAS/discussions).
 
 
 ### Related packages
--  [Signac](https://stuartlab.org/signac/)
--  [epiAneufinder](https://github.com/colomemaria/epiAneufinder)
--  [SComatic](https://github.com/cortes-ciriano-lab/SComatic)
--  [CBM](https://github.com/zhyu-lab/cbm)
+-  [Signac](https://stuartlab.org/signac/): peak calling
+-  [epiAneufinder](https://github.com/colomemaria/epiAneufinder): CNV calling
+-  [SComatic](https://github.com/cortes-ciriano-lab/SComatic): SNV calling
+-  [CBM](https://github.com/zhyu-lab/cbm): SNV denoising
