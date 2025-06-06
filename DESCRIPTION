@@ -1,5 +1,5 @@
 Package: MAAS
-Title: Multi-omics Association Analysis via Simultaneous non-negative matrix factorization
+Title: Multimodal integration of single cell ATAC-seq data enables highly accurate delineation of clinically relevant tumor cell subpopulations
 Version: 1.0.0
 Authors@R: 
     person("Kewei", "Xiong", email = "kxiongac@connect.ust.hk", role = c("aut", "cre"))
