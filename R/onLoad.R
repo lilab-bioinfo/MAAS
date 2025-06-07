@@ -13,7 +13,7 @@
     packageStartupMessage(msg)
   }
 
-  invisible(lapply(required_packages, function(pkg) {
+  invisible(lapply(required_pkgs, function(pkg) {
     suppressPackageStartupMessages(library(pkg, character.only = TRUE))
   }))
 }
