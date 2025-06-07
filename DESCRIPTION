@@ -17,7 +17,8 @@ Imports:
 	withr,
     uwot,
     ggplot2,
-    tidydr
+    tidydr,
+	parallelDist
 LinkingTo: 
     Rcpp,
     RcppArmadillo
