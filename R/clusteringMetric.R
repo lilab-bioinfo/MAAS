@@ -41,7 +41,7 @@ clusteringMetric <- function(D, clu, disMethod = c("cosine", "hamming", "euclide
 
   chi_c <- chi(D, clusters = clu)
 
-  Comb_index <- (silwidth_c / dbi_c) * dvi_c * chi_c
+  Comb_index <- (silwidth_c * dbi_c) * dvi_c
 
   return(Comb_index)
 }
