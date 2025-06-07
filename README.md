@@ -10,23 +10,26 @@ Single-cell multimodal analysis enables highly accurate delineation of clinicall
 
 <p align="center">
 
-### Quick start
-To use MAAS functions for integration, please run the following commands in __R__. We provide example data of cell similarities for the three modalities formatted as `list` R object.
+### Installation
 ```
-library(Rcpp)
-for (i in list.files("./src/", pattern="MAAS*")) {
-  sourceCpp(paste0("./src/", i))
+if (!requireNamespace("devtools", quietly = T)) {
+  install.packages("devtools")
 }
+devtools::install_github("Larrycpan/MAAS")
+```
 
-data <- readRDS("example.data/example.similarity.rds")
+### Quick start
+```
+library(MAAS)
+data("maas_example")
 maas.test <- MAAS(data$Peak, df$CNV, df$SNV, dims = 2:5)
-saveRDS(maas.test, "maas.res.all.rds")
+# saveRDS(maas.test, "maas.res.all.rds")
 ```
 
 ##### Then we can do clustering based on the consensus latent factors
 ```
 #### Determine the optimal clustering strategy
-maas.res <- readRDS("maas.res.test.rds")
+# maas.res <- readRDS("maas.res.test.rds")
 barcode.list <- rownames(data$Peak)
 set.seed(1)
 
@@ -41,6 +44,7 @@ for(i in 1:(length(maas.res)-1)){
     maas.tmp.clu <- withr::with_seed(2, kmeans(df, centers = j)$cluster)
     clusPerformance[i,j-1] <- clusteringMetric(maas.res[[i]]$W, clu = maas.tmp.clu, disMethod = "cosine")
   }
+}
 
 #### Re-running clustering with the optimal performance
 df <- as.data.frame(maas.res[[1]]$W)

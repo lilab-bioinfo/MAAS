@@ -1,5 +1,5 @@
 .onLoad <- function(libname, pkgname) {
-  required_pkgs <- c("clusterSim", "parallelDist", "fpc", "clValid")
+  required_pkgs <- c("clusterSim", "parallelDist", "fpc", "clValid", "withr", "ggplot2", "uwot", "tidydr")
   missing_pkgs <- required_pkgs[!required_pkgs %in% installed.packages()]
 
   if (length(missing_pkgs)) {
