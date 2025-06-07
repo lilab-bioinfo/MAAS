@@ -13,7 +13,11 @@ Imports:
     clusterSim,
     parallelDist,
     fpc,
-    clValid
+    clValid,
+	withr,
+    uwot,
+    ggplot2,
+    tidydr
 LinkingTo: 
     Rcpp,
     RcppArmadillo
