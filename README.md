@@ -24,7 +24,7 @@ library(MAAS)
 set.seed(1234) ## This ensure the same result for each MAAS run
 # Here we load the example data of cell-cell similarity cell matrices for each layer
 data("maas_example")
-maas.test <- MAAS(data$Peak, df$CNV, df$SNV, dims = 2:5)
+maas.test <- MAAS(maas_example$Peak, maas_example$CNV, maas_example$snv, dims = 2:5)
 ```
 
 ##### Then we can do clustering based on the consensus latent factors
@@ -40,14 +40,26 @@ for(i in 1:(length(maas.test)-1)){
     clusPerformance[i,j-1] <- clusteringMetric(maas.test[[i]]$W, clu = maas.tmp.clu, disMethod = "cosine")
   }
 }
+```
 
-#### Re-running clustering with the optimal performance
+From `clusPerformance`, we observe that *W* = 2 (number of latent factors) and *k* = 2 (number of clusters) yield an optimal score, we can then set up the parameters and run clustering again.
+
+| dims \ k | 2         | 3         | 4           | 5            | 6           |
+|----------|-----------|-----------|-------------|--------------|-------------|
+| 2        | 12.31917263 | 0.06548351 | 3.546716e-05 | 0.0001330202 | 0.00       |
+| 3        | 0.16103096 | 0.10268993 | 1.947363e-02 | 0.0917155754 | 0.002889312 |
+| 4        | 0.03599121 | 0.02681891 | 3.631345e-04 | 0.0565647215 | 0.050251758 |
+| 5        | 0.85119160 | 0.26707519 | 3.155675e-02 | 0.0219867836 | 0.014557213 |
+
+
+##### Re-running clustering with the optimal performance
+```
 df <- as.data.frame(maas.test[[1]]$W)
 maas.clu <- data.frame(Cluster = withr::with_seed(2, kmeans(df, centers = 2)$cluster))
 maas.clu$Cluster <- as.factor(maas.clu$Cluster)
 ```
 
-##### Visualization using MAAS features or UMAP plot
+##### Visualize clusters projected on embeddings
 ```
 umap.axis <- withr::with_seed(2, uwot::umap(df, n_neighbors = 10, metric = "correlation"))
 umap.axis <- as.data.frame(umap.axis); umap.axis$Cluster <- maas.clu$Cluster
