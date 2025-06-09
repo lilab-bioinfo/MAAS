@@ -11,7 +11,7 @@ Single-cell multimodal analysis enables highly accurate delineation of clinicall
 <p align="center">
 
 ### Installation
-Before installation, please make sure gcc > v5 in your system. In our test, installation is successful with gcc = 11.4.0.
+Before installation, please make sure gcc > v5 in your system. In our system, installation works well with gcc = 11.4.0.
 Use command below to check the version of gcc. If not meet the requirement, you can ask the system administrator to update the gcc.
 ```
 gcc -v
@@ -29,7 +29,7 @@ devtools::install_github("Larrycpan/MAAS")
 ```
 library(MAAS)
 set.seed(1234) ## This ensure the same result for each MAAS run
-# Here we load the example data of cell-cell similarity cell matrices for each layer
+# Here we load the example simulated data of cell-cell similarity cell matrices for each layer
 data("maas_example")
 maas.test <- MAAS(maas_example$Peak, maas_example$CNV, maas_example$snv, dims = 2:5)
 ```
@@ -87,14 +87,13 @@ ggplot(umap.axis, aes(`UMAP-1`, `UMAP-2`))+
 
 Documentation and tutorials (full data preparation and integration) can be found at <https://larrycpan.github.io/MAAS/>.
 
-In addition, we highly recommend installing [openBLAS](https://github.com/OpenMathLib/OpenBLAS) to speed matrix operations, before starting your MAAS analysis.
+In addition, we highly recommend installing [openBLAS](https://github.com/OpenMathLib/OpenBLAS) to speed matrix operations.
 
 ### Getting help
 
 If you encounter a bug or have a feature request, please open an [Issues](https://github.com/Larrycpan/MAAS/issues).
 
-If you would like to discuss questions related to single-cell analysis,
-you can open a [Discussions](https://github.com/Larrycpan/MAAS/discussions).
+If you would like to discuss questions related to single-cell analysis, you can open a [Discussions](https://github.com/Larrycpan/MAAS/discussions).
 
 
 ### Related packages
