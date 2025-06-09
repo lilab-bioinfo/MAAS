@@ -11,6 +11,13 @@ Single-cell multimodal analysis enables highly accurate delineation of clinicall
 <p align="center">
 
 ### Installation
+Before installation, please make sure gcc > v5 in your system. In our test, installation is successful with gcc = 11.4.0.
+Use command below to check the version of gcc. If not meet the requirement, you can ask the system administrator to update the gcc.
+```
+gcc -v
+```
+
+Run the command in R
 ```
 if (!requireNamespace("devtools", quietly = T)) {
   install.packages("devtools")
