@@ -1,0 +1,13 @@
+---
+title: "Tutorial of MAAS"
+---
+
+This manual helps to prepare multimodal data for Multimodel-based Analysis of scATAC-Seq (MAAS) input, including peak calling, CNV calling and SNV calling, MAAS running and functional enrichment analysis, which are organized step-by-step.
+
+
+<div align="center">__Overview of MAAS__</div>
+
+
+```{r, Figure 1.png, fig.align = 'center', fig.height = 5, fig.width = 4, out.height = "50%", out.width = "60%", echo=FALSE, }
+knitr::include_graphics("https://www.helloimg.com/i/2025/02/25/67bd7daf362ae.png")
+```
