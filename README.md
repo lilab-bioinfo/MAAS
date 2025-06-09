@@ -29,7 +29,7 @@ devtools::install_github("Larrycpan/MAAS")
 ```
 library(MAAS)
 set.seed(1234) ## This ensure the same result for each MAAS run
-# Here we load the example simulated data of cell-cell similarity cell matrices for each layer
+# Here we load the example data of cell-cell similarity cell matrices for each layer
 data("maas_example")
 maas.test <- MAAS(maas_example$Peak, maas_example$CNV, maas_example$snv, dims = 2:5)
 ```
