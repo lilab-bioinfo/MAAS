@@ -23,11 +23,7 @@ options(rmarkdown.html_vignette.check_title = FALSE)
 # Clear working space and load libraries
 rm(list = ls())
 library(dplyr)
-library(Rcpp)
-# Load MAAS Rcpp functions
-for (i in list.files("./src/", pattern="MAAS*")) {
-  sourceCpp(paste0("./src/", i))
-}
+library(MAAS)
 ```
 
 ```{r, message=FALSE, warning=FALSE, eval=FALSE}

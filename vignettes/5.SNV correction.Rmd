@@ -23,25 +23,54 @@ We have conducted benchmark of several SNV denoising tools designed for single-c
 
 In this tutorial, CBM has been installed in `~/App/cbm-main`.
 
-```{octave, message=FALSE, warning=FALSE, eval=FALSE}
+```{r, message=FALSE, warning=FALSE, eval=FALSE}
 library(dplyr)
 library(data.table)
 library(stringr)
 
-#
-input_file <- "../6.snvcorrection/snv.CBMinput.txt"
+input_file <- "snv.CBMinput.txt"
+```
+
+The raw SNV profile as input for CBM is a cell-by-mutation matrix (cells in rows and mutations in columns). The cell and mutation names will be recovered after executing CBM.
+
+``` {r, echo=FALSE, message=FALSE, warning=FALSE}
+x <- read.table("http://bioinfo.szbl.ac.cn/share/MAAS_data/snv.CBMinput.txt", sep = '\t', header = T)
+head(x)
+```
+
+``` {r, message=FALSE, warning=FALSE, eval=FALSE}
 # sample.tmp <- gsub("\\.snv\\.CBMinput\\.txt", "", file.tmp)
 output_file <- "./"
-cmd <- paste("~/App/cbm-main/bin/cbm -i", input_file, "-o", output_file, "-K 10")
+cmd <- paste("~/App/cbm-main/bin/cbm -i", input_file, "-o", output_file, "-K 10") # Set up to 10 clones
 system(cmd)
+```
 
-#
+``` r{, message=FALSE, warning=FALSE, eval=FALSE}
 pred.cluster.genotype <- as.data.frame(fread(".clones.txt"))
 rownames(pred.cluster.genotype) <- 0:(nrow(pred.cluster.genotype)-1)
+```
+
+The genotype of each cluster. Clusters in rows and mutations in columns
+``` {r, echo=FALSE, message=FALSE, warning=FALSE}
+pred.cluster.genotype <- read.table("http://bioinfo.szbl.ac.cn/share/MAAS_data/.clones.txt", sep = '\t', header = F, check.names = F)
+rownames(pred.cluster.genotype) <- 0:(nrow(pred.cluster.genotype)-1)
+head(pred.cluster.genotype)
+```
+
+```{r, message=FALSE, warning=FALSE, eval=FALSE}
 pred.cluster.label <- fread(".assignment.txt")
 pred.cluster.label <- as.data.frame(t(pred.cluster.label))
 colnames(pred.cluster.label) <- "Cluster"
+```
 
+The genotype of each cluster. One-dimension vector: Cells in columns with assigned labels
+``` {r, echo=FALSE, message=FALSE, warning=FALSE}
+pred.cluster.label <- read.table("http://bioinfo.szbl.ac.cn/share/MAAS_data/.assignment.txt", sep = '\t', header = F, check.names = F)
+pred.cluster.label
+```
+
+The cells from the same clone are assumed to be same. Hence, we assign cluster-level mutations to individual cells
+``` {r, message=FALSE, warning=FALSE, eval=FALSE}
 pred <- do.call(rbind, lapply(pred.cluster.label$Cluster, function(cluster) {
   pred.cluster.genotype[as.character(cluster), ]
 }))
@@ -51,4 +80,10 @@ rownames(pred) <- colnames(raw.snv)
 colnames(pred) <- rownames(raw.snv)
 saveRDS(pred, "denoised.mat.rds")
 
+```
+
+The denoised matrix should be like:
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+x <- read.table("http://bioinfo.szbl.ac.cn/share/MAAS_data/denoised.mat.txt", sep = '\t', header = T, row.names = 1, check.names = F)
+head(x)
 ```
