@@ -31,7 +31,7 @@ library(MAAS)
 set.seed(1234) ## This ensure the same result for each MAAS run
 # Here we load the example data of cell-cell similarity cell matrices for each layer
 data("maas_example")
-maas.test <- MAAS(maas_example$Peak, maas_example$CNV, maas_example$snv, dims = 2:5)
+maas.test <- MAAS(maas_example$Peak, maas_example$CNV, maas_example$SNV, dims = 2:5)
 ```
 
 ##### Then we can do clustering based on the consensus latent factors
@@ -82,7 +82,7 @@ ggplot(umap.axis, aes(`UMAP-1`, `UMAP-2`))+
 ```
 
 <p align="center">
-<img src="https://www.helloimg.com/i/2025/06/07/68441b2817eee.png" alt="Flowchart" style="width: 40%">
+<img src="https://www.helloimg.com/i/2025/06/09/6846fa2126ded.png" alt="Flowchart" style="width: 40%">
 </p>
 
 Documentation and tutorials (full data preparation and integration) can be found at <https://larrycpan.github.io/MAAS/>.
