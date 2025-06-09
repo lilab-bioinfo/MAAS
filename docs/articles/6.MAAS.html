@@ -64,7 +64,7 @@
       <a href="../articles/4.Peak%20correction.html">4.Peak correction</a>
     </li>
     <li>
-      <a href="../articles/5.SNV%20correction.html">5.SNV correction</a>
+      <a href="../articles/5.SNV-correction.html">5.SNV correction</a>
     </li>
     <li>
       <a href="../articles/6.MAAS.html">6.MAAS</a>
@@ -76,6 +76,9 @@
       <a href="../articles/8.Functional%20enrichment.html">8.Functional enrichment</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../articles/Contact.html">Contact</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right"></ul>
@@ -105,7 +108,8 @@
 <code class="sourceCode R"><span><span class="co"># Clear working space and load libraries</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html" class="external-link">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html" class="external-link">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">MAAS</span><span class="op">)</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">MAAS</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1234</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load data</span></span>
 <span><span class="co"># CNV</span></span>
@@ -137,7 +141,7 @@
 <span></span>
 <span><span class="co"># Calculate cell similarity</span></span>
 <span><span class="va">peak.similarity</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="fu">parallelDist</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/parallelDist/man/parDist.html" class="external-link">parDist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">peak.raw</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"cosine"</span>, threads <span class="op">=</span> <span class="fl">40</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">cnv.similarity</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="fu">parallelDist</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/parallelDist/man/parDist.html" class="external-link">parDist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">cnv.raw</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"cosine"</span>, threads <span class="op">=</span> <span class="fl">40</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">cnv.similarity</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="fu">parallelDist</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/parallelDist/man/parDist.html" class="external-link">parDist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">cnv.raw</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"hamming"</span>, threads <span class="op">=</span> <span class="fl">40</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">snv.similarity</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="fu">parallelDist</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/parallelDist/man/parDist.html" class="external-link">parDist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">snv.raw</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"hamming"</span>, threads <span class="op">=</span> <span class="fl">40</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">maas.test</span> <span class="op">&lt;-</span> <span class="fu">MAAS</span><span class="op">(</span><span class="va">peak.similarity</span>, <span class="va">cnv.similarity</span>, <span class="va">snv.similarity</span>, dims <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></span>

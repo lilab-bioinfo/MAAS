@@ -35,7 +35,7 @@ The raw SNV profile as input for CBM is a cell-by-mutation matrix (cells in rows
 
 ``` {r, echo=FALSE, message=FALSE, warning=FALSE}
 x <- read.table("http://bioinfo.szbl.ac.cn/share/MAAS_data/snv.CBMinput.txt", sep = '\t', header = T)
-head(x)
+x[1:5,1:5]
 ```
 
 ``` {r, message=FALSE, warning=FALSE, eval=FALSE}
@@ -54,19 +54,13 @@ The genotype of each cluster. Clusters in rows and mutations in columns
 ``` {r, echo=FALSE, message=FALSE, warning=FALSE}
 pred.cluster.genotype <- read.table("http://bioinfo.szbl.ac.cn/share/MAAS_data/.clones.txt", sep = '\t', header = F, check.names = F)
 rownames(pred.cluster.genotype) <- 0:(nrow(pred.cluster.genotype)-1)
-head(pred.cluster.genotype)
+pred.cluster.genotype[1:5,1:5]
 ```
 
 ```{r, message=FALSE, warning=FALSE, eval=FALSE}
 pred.cluster.label <- fread(".assignment.txt")
 pred.cluster.label <- as.data.frame(t(pred.cluster.label))
-colnames(pred.cluster.label) <- "Cluster"
-```
-
-The genotype of each cluster. One-dimension vector: Cells in columns with assigned labels
-``` {r, echo=FALSE, message=FALSE, warning=FALSE}
-pred.cluster.label <- read.table("http://bioinfo.szbl.ac.cn/share/MAAS_data/.assignment.txt", sep = '\t', header = F, check.names = F)
-pred.cluster.label
+colnames(pred.cluster.label) <- "Cluster" # One-dimension vector: Cells in rows with assigned clusters
 ```
 
 The cells from the same clone are assumed to be same. Hence, we assign cluster-level mutations to individual cells
@@ -85,5 +79,5 @@ saveRDS(pred, "denoised.mat.rds")
 The denoised matrix should be like:
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 x <- read.table("http://bioinfo.szbl.ac.cn/share/MAAS_data/denoised.mat.txt", sep = '\t', header = T, row.names = 1, check.names = F)
-head(x)
+x[1:5,1:5]
 ```

@@ -24,6 +24,7 @@ options(rmarkdown.html_vignette.check_title = FALSE)
 rm(list = ls())
 library(dplyr)
 library(MAAS)
+set.seed(1234)
 ```
 
 ```{r, message=FALSE, warning=FALSE, eval=FALSE}
@@ -57,7 +58,7 @@ snv.raw <- snv[share.barcode,] %>% as.matrix()
 
 # Calculate cell similarity
 peak.similarity <- 1- as.matrix(parallelDist::parDist(as.matrix(peak.raw), method = "cosine", threads = 40))
-cnv.similarity <- 1- as.matrix(parallelDist::parDist(as.matrix(cnv.raw), method = "cosine", threads = 40))
+cnv.similarity <- 1- as.matrix(parallelDist::parDist(as.matrix(cnv.raw), method = "hamming", threads = 40))
 snv.similarity <- 1- as.matrix(parallelDist::parDist(as.matrix(snv.raw), method = "hamming", threads = 40))
 
 maas.test <- MAAS(peak.similarity, cnv.similarity, snv.similarity, dims = 2:5)

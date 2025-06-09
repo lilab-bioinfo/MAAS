@@ -59,13 +59,13 @@ gsvaCluster <- cbind(gsvaResult1, Cluster = cluster$Cluster)
 test.res <- data.frame()
 for(i in 1:(ncol(gsvaCluster)-1)){
   
-  test.tmp <- wilcox.test(gsvaCluster[gsvaCluster$Cluster == "C1", i],
+  test.tmp <- t.test(gsvaCluster[gsvaCluster$Cluster == "C1", i],
                           gsvaCluster[gsvaCluster$Cluster == "C2", i])
   test.res <- rbind(test.res, data.frame(Pathway = colnames(gsvaCluster)[i],
                                          Pval = test.tmp$p.value))
 }
 test.res$Padj <- p.adjust(test.res$Pval, method = "fdr")
-test.res <- test.res[test.res$Padj < 0.05,]
+test.res <- test.res[test.res$Padj < 0.1,]
 
 hmExp=t(gsvaResult1)[test.res$Pathway,]
 hmExp <- as.data.frame(t(hmExp)); hmExp <- hmExp[rownames(cluster),]
@@ -96,5 +96,5 @@ draw(p, heatmap_legend_side="bottom")
 ```
 
 ```{r, maas.hallmark.png, fig.align = 'center', fig.height = 4, fig.width = 5, out.height = "35%", out.width = "50%", echo=FALSE}
-knitr::include_graphics("https://www.helloimg.com/i/2025/02/25/67bd7ef571ee7.png")
+knitr::include_graphics("https://www.helloimg.com/i/2025/06/09/6846fa1fd9597.png")
 ```

@@ -64,7 +64,7 @@
       <a href="../articles/4.Peak%20correction.html">4.Peak correction</a>
     </li>
     <li>
-      <a href="../articles/5.SNV%20correction.html">5.SNV correction</a>
+      <a href="../articles/5.SNV-correction.html">5.SNV correction</a>
     </li>
     <li>
       <a href="../articles/6.MAAS.html">6.MAAS</a>
@@ -76,6 +76,9 @@
       <a href="../articles/8.Functional%20enrichment.html">8.Functional enrichment</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../articles/Contact.html">Contact</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right"></ul>
@@ -140,13 +143,13 @@ downloaded from <a href="https://www.gsea-msigdb.org/gsea/msigdb/" class="extern
 <span><span class="va">test.res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">gsvaCluster</span><span class="op">)</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
 <span>  </span>
-<span>  <span class="va">test.tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html" class="external-link">wilcox.test</a></span><span class="op">(</span><span class="va">gsvaCluster</span><span class="op">[</span><span class="va">gsvaCluster</span><span class="op">$</span><span class="va">Cluster</span> <span class="op">==</span> <span class="st">"C1"</span>, <span class="va">i</span><span class="op">]</span>,</span>
+<span>  <span class="va">test.tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">gsvaCluster</span><span class="op">[</span><span class="va">gsvaCluster</span><span class="op">$</span><span class="va">Cluster</span> <span class="op">==</span> <span class="st">"C1"</span>, <span class="va">i</span><span class="op">]</span>,</span>
 <span>                          <span class="va">gsvaCluster</span><span class="op">[</span><span class="va">gsvaCluster</span><span class="op">$</span><span class="va">Cluster</span> <span class="op">==</span> <span class="st">"C2"</span>, <span class="va">i</span><span class="op">]</span><span class="op">)</span></span>
 <span>  <span class="va">test.res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">test.res</span>, <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>Pathway <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">gsvaCluster</span><span class="op">)</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,</span>
 <span>                                         Pval <span class="op">=</span> <span class="va">test.tmp</span><span class="op">$</span><span class="va">p.value</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span><span class="va">test.res</span><span class="op">$</span><span class="va">Padj</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/p.adjust.html" class="external-link">p.adjust</a></span><span class="op">(</span><span class="va">test.res</span><span class="op">$</span><span class="va">Pval</span>, method <span class="op">=</span> <span class="st">"fdr"</span><span class="op">)</span></span>
-<span><span class="va">test.res</span> <span class="op">&lt;-</span> <span class="va">test.res</span><span class="op">[</span><span class="va">test.res</span><span class="op">$</span><span class="va">Padj</span> <span class="op">&lt;</span> <span class="fl">0.05</span>,<span class="op">]</span></span>
+<span><span class="va">test.res</span> <span class="op">&lt;-</span> <span class="va">test.res</span><span class="op">[</span><span class="va">test.res</span><span class="op">$</span><span class="va">Padj</span> <span class="op">&lt;</span> <span class="fl">0.1</span>,<span class="op">]</span></span>
 <span></span>
 <span><span class="va">hmExp</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">gsvaResult1</span><span class="op">)</span><span class="op">[</span><span class="va">test.res</span><span class="op">$</span><span class="va">Pathway</span>,<span class="op">]</span></span>
 <span><span class="va">hmExp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">hmExp</span><span class="op">)</span><span class="op">)</span>; <span class="va">hmExp</span> <span class="op">&lt;-</span> <span class="va">hmExp</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">cluster</span><span class="op">)</span>,<span class="op">]</span></span>
@@ -174,7 +177,7 @@ downloaded from <a href="https://www.gsea-msigdb.org/gsea/msigdb/" class="extern
 <span>             show_row_dend <span class="op">=</span> <span class="cn">F</span>,</span>
 <span>             heatmap_height <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">0.68</span>, <span class="st">"cm"</span><span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">hmExp</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/draw-dispatch.html" class="external-link">draw</a></span><span class="op">(</span><span class="va">p</span>, heatmap_legend_side<span class="op">=</span><span class="st">"bottom"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="https://www.helloimg.com/i/2025/02/25/67bd7ef571ee7.png" width="50%" height="35%" style="display: block; margin: auto;"></p>
+<p><img src="https://www.helloimg.com/i/2025/06/09/6846fa1fd9597.png" width="50%" height="35%" style="display: block; margin: auto;"></p>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
