@@ -55,7 +55,7 @@ gsvaResult1 <- gsvaResult[sameSample,,drop=F]
 cluster <- cluster[sameSample,,drop=F]
 gsvaCluster <- cbind(gsvaResult1, Cluster = cluster$Cluster)
 
-# In this case, we perform a very simple wilcoxon rank-sum test to identify differnetially enriched hallmarks.
+# In this case, we perform a very simple t-test to identify dysfunctional hallmarks.
 test.res <- data.frame()
 for(i in 1:(ncol(gsvaCluster)-1)){
   
