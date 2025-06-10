@@ -61,6 +61,6 @@ peak.similarity <- 1- as.matrix(parallelDist::parDist(as.matrix(peak.raw), metho
 cnv.similarity <- 1- as.matrix(parallelDist::parDist(as.matrix(cnv.raw), method = "hamming", threads = 40))
 snv.similarity <- 1- as.matrix(parallelDist::parDist(as.matrix(snv.raw), method = "hamming", threads = 40))
 
-maas.test <- MAAS(peak.similarity, cnv.similarity, snv.similarity, dims = 2:5)
+maas.test <- MAAS(peak.similarity, cnv.similarity, snv.similarity, dims = 2:5) # The three cell=cell similarity matrix is stored in the data folder of MAAS package.
 saveRDS(maas.test, "maas.res.all.rds")
 ```

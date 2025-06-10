@@ -72,5 +72,5 @@ ggplot(umap.axis, aes(`UMAP-1`, `UMAP-2`))+
 ```
 
 ```{r, HCC.MAAS.cluster.umap.png, fig.align = 'center', fig.height = 4, fig.width = 5, out.height = "25%", out.width = "30%", echo=FALSE}
-knitr::include_graphics("https://www.helloimg.com/i/2025/06/09/6846fa2126ded.png")
+knitr::include_graphics("https://www.helloimg.com/i/2025/06/10/68479ca101406.png")
 ```
