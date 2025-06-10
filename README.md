@@ -11,8 +11,8 @@ Single-cell multimodal analysis enables highly accurate delineation of clinicall
 <p align="center">
 
 ### Installation
-Before installation, please make sure gcc > v5 in your system. In our system, installation works well with gcc = 11.4.0.
-Use command below to check the version of gcc. If not meet the requirement, you can ask the system administrator to update the gcc.
+Before installation, we recommend gcc 6.1 or newer in your system. The installation works well with gcc = 11.4.0 in our system.
+Use command below to check the version of gcc. If it doesn't meet the requirement, you can ask the system administrator to update the gcc.
 ```
 gcc -v
 ```
@@ -51,12 +51,13 @@ for(i in 1:(length(maas.test)-1)){
 
 From `clusPerformance`, we observe that *W* = 2 (number of latent factors) and *k* = 2 (number of clusters) yield an optimal score, we can then set up the parameters and run clustering again.
 
-| dims \ k | 2         | 3         | 4           | 5            | 6           |
-|----------|-----------|-----------|-------------|--------------|-------------|
-| 2        | 12.31917263 | 0.06548351 | 3.546716e-05 | 0.0001330202 | 0.00       |
-| 3        | 0.16103096 | 0.10268993 | 1.947363e-02 | 0.0917155754 | 0.002889312 |
-| 4        | 0.03599121 | 0.02681891 | 3.631345e-04 | 0.0565647215 | 0.050251758 |
-| 5        | 0.85119160 | 0.26707519 | 3.155675e-02 | 0.0219867836 | 0.014557213 |
+|        | k=2       | k=3       | k=4        | k=5        | k=6         |
+|--------|-----------|-----------|------------|------------|-------------|
+| dims=2 | <span style="color:red"><strong>7.6580070</strong></span> | 0.04792606| 0.001519815| 0.0003074383| 0.000000e+00 |
+| dims=3 | 0.1610961 | 0.10854696| 0.011809798| 0.0666966181| 3.026747e-03 |
+| dims=4 | 0.1280585 | 0.05573401| 0.015179780| 0.0071901979| 1.336539e-05 |
+| dims=5 | 0.2274295 | 0.09587623| 0.006809193| 0.0052164072| 1.387891e-02 |
+
 
 
 ##### Re-running clustering with the optimal performance
