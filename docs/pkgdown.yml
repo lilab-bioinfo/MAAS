@@ -2,7 +2,7 @@ pandoc: 3.1.1
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
-  1.scATAC-seq data analysis: 1.scATAC-seq data analysis.html
+  1.scATAC-seq_data_analysis: 1.scATAC-seq_data_analysis.html
   2.CNV calling: 2.CNV calling.html
   3.SNV calling: 3.SNV calling.html
   4.Peak correction: 4.Peak correction.html
@@ -12,5 +12,5 @@ articles:
   8.Functional enrichment: 8.Functional enrichment.html
   Contact: Contact.html
   index: index.html
-last_built: 2025-06-10T05:03Z
+last_built: 2025-06-10T05:07Z
 

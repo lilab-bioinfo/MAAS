@@ -98,14 +98,17 @@
             
       
       
-      <div class="hidden name"><code>1.scATAC-seq data analysis.Rmd</code></div>
+      <div class="hidden name"><code>1.scATAC-seq_data_analysis.Rmd</code></div>
 
     </div>
 
     
     
 <p>Here we use the R package <a href="https://stuartlab.org/signac/" class="external-link">Signac</a> to processing scATAC-seq
-peak data. The example data has been updated to <a href="https://zenodo.org/records/15621738" class="external-link">Zenodo</a>.</p>
+peak data. The example data has been updated to Zenodo (<a href="https://zenodo.org/records/15621738" class="external-link uri">https://zenodo.org/records/15621738</a>). We did not provide
+the BAM file due to the large file size. Users can obtain the file by
+running the cellranger pipeline using the data from GEO (<a href="https://www.ncbi.nlm.nih.gov/geo/" class="external-link uri">https://www.ncbi.nlm.nih.gov/geo/</a>) under the accession
+number GSE227265.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># Clear workspace and load libraries</span></span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span>
 <span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">library</span>(Signac)</span>
