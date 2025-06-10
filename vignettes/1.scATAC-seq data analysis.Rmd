@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 options(rmarkdown.html_vignette.check_title = FALSE)
 ```
 
-Here we use the R package [Signac](https://stuartlab.org/signac/) to processing scATAC-seq peak data. The example data has been updated to Zenodo.
+Here we use the R package [Signac](https://stuartlab.org/signac/) to processing scATAC-seq peak data. The example data has been updated to [Zenodo](https://zenodo.org/records/15621738).
 
 ```{r "Load libraries", message=FALSE, warning=FALSE, eval=FALSE}
 # Clear workspace and load libraries
