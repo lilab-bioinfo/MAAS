@@ -91,7 +91,7 @@ ggplot(umap.axis, aes(`UMAP-1`, `UMAP-2`))+
 <img src="https://www.helloimg.com/i/2025/06/10/68479ca101406.png" alt="Flowchart" style="width: 40%">
 </p>
 
-The running history and dependencies in our session is available [here](https://larrycpan.github.io/MAAS/quick_start.html)
+The running history and dependencies in our session is available [here](https://larrycpan.github.io/MAAS/quick_start.html).
 
 Documentation and step-by-step tutorials (full data preparation and integration) can be found at <https://larrycpan.github.io/MAAS/>. 
 Data for tutorial has been uploaded to Zenodo (https://zenodo.org/records/15641500). We did not provide the BAM file due to the large file size. Users can obtain the file by running the cellranger pipeline using the data from GEO (https://www.ncbi.nlm.nih.gov/geo/) under the accession number GSE227265.
