@@ -86,7 +86,8 @@ ggplot(umap.axis, aes(`UMAP-1`, `UMAP-2`))+
 <img src="https://www.helloimg.com/i/2025/06/10/68479ca101406.png" alt="Flowchart" style="width: 40%">
 </p>
 
-Documentation and step-by-step tutorials (full data preparation and integration) can be found at <https://larrycpan.github.io/MAAS/>.
+Documentation and step-by-step tutorials (full data preparation and integration) can be found at <https://larrycpan.github.io/MAAS/>. 
+Data for tutorial has been uploaded to Zenodo (https://zenodo.org/records/15621738).
 
 In addition, we highly recommend installing [openBLAS](https://github.com/OpenMathLib/OpenBLAS) to speed matrix operations.
 
