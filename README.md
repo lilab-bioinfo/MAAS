@@ -23,11 +23,16 @@ if (!requireNamespace("devtools", quietly = T)) {
   install.packages("devtools")
 }
 devtools::install_github("Larrycpan/MAAS")
+
+# To plot the same UMAP plot, please also run install tidydr
+install.packages("tidydr")
 ```
 
 ### Quick start
 ```
 library(MAAS)
+library(tidydr)
+
 set.seed(1234) ## This ensure the same result for each MAAS run
 # Here we load the example data of cell-cell similarity cell matrices for each layer
 data("maas_example")
