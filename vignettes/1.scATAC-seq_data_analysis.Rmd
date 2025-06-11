@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 options(rmarkdown.html_vignette.check_title = FALSE)
 ```
 
-Here we use the R package [Signac](https://stuartlab.org/signac/) to processing scATAC-seq peak data. The example data has been updated to Zenodo (https://zenodo.org/records/15621738). We did not provide the BAM file due to the large file size. Users can obtain the file by running the cellranger pipeline using the data from GEO (https://www.ncbi.nlm.nih.gov/geo/) under the accession number GSE227265.
+Here we use the R package [Signac](https://stuartlab.org/signac/) to processing scATAC-seq peak data.
 
 ```{r "Load libraries", message=FALSE, warning=FALSE, eval=FALSE}
 # Clear workspace and load libraries

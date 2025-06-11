@@ -120,54 +120,102 @@ MAAS.<br></p>
 <p>The raw SNV profile as input for CBM is a cell-by-mutation matrix
 (cells in rows and mutations in columns). The cell and mutation names
 will be recovered after executing CBM.</p>
-<pre><code><span><span class="co">#&gt;   X1 X0 X0.1 X0.2 X0.3</span></span>
-<span><span class="co">#&gt; 1  0  0    1    0    0</span></span>
-<span><span class="co">#&gt; 2  0  0    0    0    0</span></span>
-<span><span class="co">#&gt; 3  0  0    0    0    0</span></span>
-<span><span class="co">#&gt; 4  0  0    0    0    0</span></span>
-<span><span class="co">#&gt; 5  0  0    0    0    0</span></span></code></pre>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.table</a></span><span class="op">(</span><span class="st">"http://bioinfo.szbl.ac.cn/share/MAAS_data/snv.CBMinput.txt"</span>, sep <span class="op">=</span> <span class="st">'\t'</span>, header <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
+<span><span class="va">input</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt;    X1 X0 X0.1 X0.2 X0.3 X0.4 X0.5 X0.6 X0.7 X0.8</span></span>
+<span><span class="co">#&gt; 1   0  0    1    0    0    0    0    0    0    0</span></span>
+<span><span class="co">#&gt; 2   0  0    0    0    0    0    0    0    0    0</span></span>
+<span><span class="co">#&gt; 3   0  0    0    0    0    0    0    0    0    0</span></span>
+<span><span class="co">#&gt; 4   0  0    0    0    0    0    0    0    0    0</span></span>
+<span><span class="co">#&gt; 5   0  0    0    0    0    0    0    0    0    0</span></span>
+<span><span class="co">#&gt; 6   0  0    0    0    0    0    0    0    0    0</span></span>
+<span><span class="co">#&gt; 7   0  0    0    0    0    0    0    0    0    0</span></span>
+<span><span class="co">#&gt; 8   0  0    0    0    0    0    0    0    0    0</span></span>
+<span><span class="co">#&gt; 9   0  0    0    0    0    0    0    0    0    0</span></span>
+<span><span class="co">#&gt; 10  0  0    0    0    0    0    0    0    0    0</span></span></code></pre>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># sample.tmp &lt;- gsub("\\.snv\\.CBMinput\\.txt", "", file.tmp)</span></span>
 <span><span class="va">output_file</span> <span class="op">&lt;-</span> <span class="st">"./"</span></span>
-<span><span class="va">cmd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"~/App/cbm-main/bin/cbm -i"</span>, <span class="va">input_file</span>, <span class="st">"-o"</span>, <span class="va">output_file</span>, <span class="st">"-K 10"</span><span class="op">)</span> <span class="co"># Set up to 10 clones</span></span>
+<span><span class="va">cmd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"~/App/cbm-main/bin/cbm -i"</span>, <span class="va">input_file</span>, <span class="st">"-o"</span>, <span class="va">output_file</span>, <span class="st">"-K 10"</span><span class="op">)</span> <span class="co"># Set up to 10 clones</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.html" class="external-link">system</a></span><span class="op">(</span><span class="va">cmd</span><span class="op">)</span></span></code></pre></div>
-<p><code>r{, message=FALSE, warning=FALSE, eval=FALSE} pred.cluster.genotype &lt;- as.data.frame(fread(".clones.txt")) rownames(pred.cluster.genotype) &lt;- 0:(nrow(pred.cluster.genotype)-1)</code></p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">pred.cluster.genotype</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="st">".clones.txt"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">pred.cluster.genotype</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">0</span><span class="op">:</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">pred.cluster.genotype</span><span class="op">)</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">pred.cluster.genotype</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></span></code></pre></div>
 <p>The genotype of each cluster. Clusters in rows and mutations in
 columns</p>
-<pre><code><span><span class="co">#&gt;   V1 V2 V3 V4 V5</span></span>
-<span><span class="co">#&gt; 0  1  0  1  1  0</span></span>
-<span><span class="co">#&gt; 1  0  0  0  0  0</span></span>
-<span><span class="co">#&gt; 2  0  0  0  0  0</span></span>
-<span><span class="co">#&gt; 3  0  0  0  0  0</span></span>
-<span><span class="co">#&gt; 4  0  0  0  0  0</span></span></code></pre>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<pre><code><span><span class="co">#&gt;   V1 V2 V3 V4 V5 V6 V7 V8 V9 V10</span></span>
+<span><span class="co">#&gt; 0  1  0  1  1  0  0  0  0  0   0</span></span>
+<span><span class="co">#&gt; 1  0  0  0  0  0  0  0  0  0   0</span></span>
+<span><span class="co">#&gt; 2  0  0  0  0  0  0  0  0  0   0</span></span>
+<span><span class="co">#&gt; 3  0  0  0  0  0  0  0  0  0   0</span></span>
+<span><span class="co">#&gt; 4  0  0  0  0  0  0  0  0  0   0</span></span>
+<span><span class="co">#&gt; 5  0  0  0  0  0  0  0  0  0   0</span></span>
+<span><span class="co">#&gt; 6  0  0  0  0  0  0  0  0  0   0</span></span>
+<span><span class="co">#&gt; 7  0  0  0  0  0  0  0  0  1   1</span></span>
+<span><span class="co">#&gt; 8  0  0  0  0  0  0  0  0  0   0</span></span>
+<span><span class="co">#&gt; 9  1  0  1  1  0  0  0  0  0   1</span></span></code></pre>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pred.cluster.label</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="st">".assignment.txt"</span><span class="op">)</span></span>
-<span><span class="va">pred.cluster.label</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">pred.cluster.label</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">pred.cluster.label</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"Cluster"</span> <span class="co"># One-dimension vector: Cells in rows with assigned clusters</span></span></code></pre></div>
+<span><span class="va">pred.cluster.label</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">pred.cluster.label</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">pred.cluster.label</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"Cluster"</span> <span class="co"># One-dimension vector: Cells in rows with assigned clusters</span></span></code></pre></div>
 <p>The cells from the same clone are assumed to be same. Hence, we
 assign cluster-level mutations to individual cells</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">pred.cluster.label</span><span class="op">$</span><span class="va">Cluster</span>, <span class="kw">function</span><span class="op">(</span><span class="va">cluster</span><span class="op">)</span> <span class="op">{</span></span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">pred.cluster.label</span><span class="op">$</span><span class="va">Cluster</span>, <span class="kw">function</span><span class="op">(</span><span class="va">cluster</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">pred.cluster.genotype</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">cluster</span><span class="op">)</span>, <span class="op">]</span></span>
 <span><span class="op">}</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">raw.snv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="st">"snv.mat.rds"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">pred</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">raw.snv</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">pred</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">raw.snv</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">saveRDS</a></span><span class="op">(</span><span class="va">pred</span>, <span class="st">"denoised.mat.rds"</span><span class="op">)</span></span></code></pre></div>
-<p>The denoised matrix should be like:</p>
+<span><span class="va">pred.cluster.genotype</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;                  chr1:634045:T&gt;G chr16:46390534:G&gt;A chr17:22521407:G&gt;A</span></span>
 <span><span class="co">#&gt; AAACTCGCATTCTTTG               1                  0                  1</span></span>
 <span><span class="co">#&gt; AAACTCGTCCATTGTT               0                  0                  0</span></span>
 <span><span class="co">#&gt; AAACTCGTCGTTGTTT               0                  0                  0</span></span>
 <span><span class="co">#&gt; AAACTGCAGAGTCCGA               0                  0                  0</span></span>
 <span><span class="co">#&gt; AAACTGCCAGGGAGTT               0                  0                  0</span></span>
-<span><span class="co">#&gt;                  chr17:22521415:T&gt;C chr17:22521426:T&gt;C</span></span>
-<span><span class="co">#&gt; AAACTCGCATTCTTTG                  1                  0</span></span>
-<span><span class="co">#&gt; AAACTCGTCCATTGTT                  0                  0</span></span>
-<span><span class="co">#&gt; AAACTCGTCGTTGTTT                  0                  0</span></span>
-<span><span class="co">#&gt; AAACTGCAGAGTCCGA                  0                  0</span></span>
-<span><span class="co">#&gt; AAACTGCCAGGGAGTT                  0                  0</span></span></code></pre>
+<span><span class="co">#&gt; AAACTGCTCTACATCT               0                  0                  0</span></span>
+<span><span class="co">#&gt; AAAGATGCAGGTGTCC               0                  0                  0</span></span>
+<span><span class="co">#&gt; AAAGATGGTCCGTGCA               0                  0                  0</span></span>
+<span><span class="co">#&gt; AAAGGATGTTCCGCGA               0                  0                  0</span></span>
+<span><span class="co">#&gt; AAAGGGCAGACCAATA               0                  0                  0</span></span>
+<span><span class="co">#&gt;                  chr17:22521415:T&gt;C chr17:22521426:T&gt;C chr22:10742083:C&gt;T</span></span>
+<span><span class="co">#&gt; AAACTCGCATTCTTTG                  1                  0                  0</span></span>
+<span><span class="co">#&gt; AAACTCGTCCATTGTT                  0                  0                  0</span></span>
+<span><span class="co">#&gt; AAACTCGTCGTTGTTT                  0                  0                  0</span></span>
+<span><span class="co">#&gt; AAACTGCAGAGTCCGA                  0                  0                  0</span></span>
+<span><span class="co">#&gt; AAACTGCCAGGGAGTT                  0                  0                  0</span></span>
+<span><span class="co">#&gt; AAACTGCTCTACATCT                  0                  0                  0</span></span>
+<span><span class="co">#&gt; AAAGATGCAGGTGTCC                  0                  0                  0</span></span>
+<span><span class="co">#&gt; AAAGATGGTCCGTGCA                  0                  0                  0</span></span>
+<span><span class="co">#&gt; AAAGGATGTTCCGCGA                  0                  0                  0</span></span>
+<span><span class="co">#&gt; AAAGGGCAGACCAATA                  0                  0                  0</span></span>
+<span><span class="co">#&gt;                  chr22:10742088:G&gt;T chr3:93470405:A&gt;T chr3:93470446:G&gt;A</span></span>
+<span><span class="co">#&gt; AAACTCGCATTCTTTG                  0                 0                 0</span></span>
+<span><span class="co">#&gt; AAACTCGTCCATTGTT                  0                 0                 0</span></span>
+<span><span class="co">#&gt; AAACTCGTCGTTGTTT                  0                 0                 0</span></span>
+<span><span class="co">#&gt; AAACTGCAGAGTCCGA                  0                 0                 0</span></span>
+<span><span class="co">#&gt; AAACTGCCAGGGAGTT                  0                 0                 0</span></span>
+<span><span class="co">#&gt; AAACTGCTCTACATCT                  0                 0                 0</span></span>
+<span><span class="co">#&gt; AAAGATGCAGGTGTCC                  0                 0                 0</span></span>
+<span><span class="co">#&gt; AAAGATGGTCCGTGCA                  0                 0                 0</span></span>
+<span><span class="co">#&gt; AAAGGATGTTCCGCGA                  0                 0                 0</span></span>
+<span><span class="co">#&gt; AAAGGGCAGACCAATA                  0                 0                 0</span></span>
+<span><span class="co">#&gt;                  chr3:93470451:C&gt;T</span></span>
+<span><span class="co">#&gt; AAACTCGCATTCTTTG                 0</span></span>
+<span><span class="co">#&gt; AAACTCGTCCATTGTT                 0</span></span>
+<span><span class="co">#&gt; AAACTCGTCGTTGTTT                 0</span></span>
+<span><span class="co">#&gt; AAACTGCAGAGTCCGA                 0</span></span>
+<span><span class="co">#&gt; AAACTGCCAGGGAGTT                 0</span></span>
+<span><span class="co">#&gt; AAACTGCTCTACATCT                 0</span></span>
+<span><span class="co">#&gt; AAAGATGCAGGTGTCC                 0</span></span>
+<span><span class="co">#&gt; AAAGATGGTCCGTGCA                 0</span></span>
+<span><span class="co">#&gt; AAAGGATGTTCCGCGA                 0</span></span>
+<span><span class="co">#&gt; AAAGGGCAGACCAATA                 0</span></span></code></pre>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">raw.snv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="st">"snv.mat.rds"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">pred</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">raw.snv</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">pred</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">raw.snv</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">saveRDS</a></span><span class="op">(</span><span class="va">pred</span>, <span class="st">"denoised.mat.rds"</span><span class="op">)</span></span></code></pre></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

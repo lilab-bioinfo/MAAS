@@ -33,9 +33,14 @@ input_file <- "snv.CBMinput.txt"
 
 The raw SNV profile as input for CBM is a cell-by-mutation matrix (cells in rows and mutations in columns). The cell and mutation names will be recovered after executing CBM.
 
+``` {r, message=FALSE, warning=FALSE, eval=FALSE}
+input <- read.table("http://bioinfo.szbl.ac.cn/share/MAAS_data/snv.CBMinput.txt", sep = '\t', header = T)
+input[1:10,1:10]
+```
+
 ``` {r, echo=FALSE, message=FALSE, warning=FALSE}
 x <- read.table("http://bioinfo.szbl.ac.cn/share/MAAS_data/snv.CBMinput.txt", sep = '\t', header = T)
-x[1:5,1:5]
+x[1:10,1:10]
 ```
 
 ``` {r, message=FALSE, warning=FALSE, eval=FALSE}
@@ -45,16 +50,17 @@ cmd <- paste("~/App/cbm-main/bin/cbm -i", input_file, "-o", output_file, "-K 10"
 system(cmd)
 ```
 
-``` r{, message=FALSE, warning=FALSE, eval=FALSE}
+``` {r, message=FALSE, warning=FALSE, eval=FALSE}
 pred.cluster.genotype <- as.data.frame(fread(".clones.txt"))
 rownames(pred.cluster.genotype) <- 0:(nrow(pred.cluster.genotype)-1)
+pred.cluster.genotype[1:10,1:10]
 ```
 
 The genotype of each cluster. Clusters in rows and mutations in columns
 ``` {r, echo=FALSE, message=FALSE, warning=FALSE}
 pred.cluster.genotype <- read.table("http://bioinfo.szbl.ac.cn/share/MAAS_data/.clones.txt", sep = '\t', header = F, check.names = F)
 rownames(pred.cluster.genotype) <- 0:(nrow(pred.cluster.genotype)-1)
-pred.cluster.genotype[1:5,1:5]
+pred.cluster.genotype[1:10,1:10]
 ```
 
 ```{r, message=FALSE, warning=FALSE, eval=FALSE}
@@ -68,16 +74,17 @@ The cells from the same clone are assumed to be same. Hence, we assign cluster-l
 pred <- do.call(rbind, lapply(pred.cluster.label$Cluster, function(cluster) {
   pred.cluster.genotype[as.character(cluster), ]
 }))
+pred.cluster.genotype[1:10,1:10]
+```
 
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+x <- read.table("http://bioinfo.szbl.ac.cn/share/MAAS_data/denoised.mat.txt", sep = '\t', header = T, row.names = 1, check.names = F)
+x[1:10,1:10]
+```
+
+``` {r, message=FALSE, warning=FALSE, eval=FALSE}
 raw.snv <- readRDS("snv.mat.rds")
 rownames(pred) <- colnames(raw.snv)
 colnames(pred) <- rownames(raw.snv)
 saveRDS(pred, "denoised.mat.rds")
-
-```
-
-The denoised matrix should be like:
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
-x <- read.table("http://bioinfo.szbl.ac.cn/share/MAAS_data/denoised.mat.txt", sep = '\t', header = T, row.names = 1, check.names = F)
-x[1:5,1:5]
 ```

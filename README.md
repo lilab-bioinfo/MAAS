@@ -87,7 +87,7 @@ ggplot(umap.axis, aes(`UMAP-1`, `UMAP-2`))+
 </p>
 
 Documentation and step-by-step tutorials (full data preparation and integration) can be found at <https://larrycpan.github.io/MAAS/>. 
-Data for tutorial has been uploaded to Zenodo (https://zenodo.org/records/15621738).
+Data for tutorial has been uploaded to Zenodo (https://zenodo.org/records/15641500). We did not provide the BAM file due to the large file size. Users can obtain the file by running the cellranger pipeline using the data from GEO (https://www.ncbi.nlm.nih.gov/geo/) under the accession number GSE227265.
 
 In addition, we highly recommend installing [openBLAS](https://github.com/OpenMathLib/OpenBLAS) to speed matrix operations.
 

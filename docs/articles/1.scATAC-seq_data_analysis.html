@@ -105,10 +105,7 @@
     
     
 <p>Here we use the R package <a href="https://stuartlab.org/signac/" class="external-link">Signac</a> to processing scATAC-seq
-peak data. The example data has been updated to Zenodo (<a href="https://zenodo.org/records/15621738" class="external-link uri">https://zenodo.org/records/15621738</a>). We did not provide
-the BAM file due to the large file size. Users can obtain the file by
-running the cellranger pipeline using the data from GEO (<a href="https://www.ncbi.nlm.nih.gov/geo/" class="external-link uri">https://www.ncbi.nlm.nih.gov/geo/</a>) under the accession
-number GSE227265.</p>
+peak data.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># Clear workspace and load libraries</span></span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span>
 <span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">library</span>(Signac)</span>
@@ -210,7 +207,7 @@ number GSE227265.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">pkgs</span>, <span class="va">require</span>, character.only <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">scMayoMap</span><span class="op">)</span></span>
 <span><span class="co"># run ScType</span></span>
-<span><span class="va">obj</span> <span class="op">&lt;-</span> <span class="fu">scMayoMap</span><span class="op">(</span>data <span class="op">=</span> <span class="va">allMarkers</span>, tissue <span class="op">=</span> <span class="st">'liver'</span><span class="op">)</span></span>
+<span><span class="va">obj</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scMayoMap/man/scMayoMap.html" class="external-link">scMayoMap</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">allMarkers</span>, tissue <span class="op">=</span> <span class="st">'liver'</span><span class="op">)</span></span>
 <span><span class="va">res</span> <span class="op">&lt;-</span> <span class="va">obj</span><span class="op">$</span><span class="va">res</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span></code></pre></div>
