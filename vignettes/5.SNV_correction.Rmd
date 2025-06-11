@@ -53,20 +53,28 @@ system(cmd)
 ``` {r, message=FALSE, warning=FALSE, eval=FALSE}
 pred.cluster.genotype <- as.data.frame(fread(".clones.txt"))
 rownames(pred.cluster.genotype) <- 0:(nrow(pred.cluster.genotype)-1)
-pred.cluster.genotype[1:10,1:10]
+pred.cluster.genotype[,1:10]
 ```
 
 The genotype of each cluster. Clusters in rows and mutations in columns
 ``` {r, echo=FALSE, message=FALSE, warning=FALSE}
 pred.cluster.genotype <- read.table("http://bioinfo.szbl.ac.cn/share/MAAS_data/.clones.txt", sep = '\t', header = F, check.names = F)
 rownames(pred.cluster.genotype) <- 0:(nrow(pred.cluster.genotype)-1)
-pred.cluster.genotype[1:10,1:10]
+pred.cluster.genotype[,1:10]
 ```
 
 ```{r, message=FALSE, warning=FALSE, eval=FALSE}
 pred.cluster.label <- fread(".assignment.txt")
 pred.cluster.label <- as.data.frame(t(pred.cluster.label))
 colnames(pred.cluster.label) <- "Cluster" # One-dimension vector: Cells in rows with assigned clusters
+pred.cluster.label[1:10,,drop = F]
+```
+
+``` {r, echo=FALSE, message=FALSE, warning=FALSE}
+pred.cluster.label <- data.table::fread("http://bioinfo.szbl.ac.cn/share/MAAS_data/.assignment.txt")
+pred.cluster.label <- as.data.frame(t(pred.cluster.label))
+colnames(pred.cluster.label) <- "Cluster" # One-dimension vector: Cells in rows with assigned clusters
+pred.cluster.label[1:10,,drop = F]
 ```
 
 The cells from the same clone are assumed to be same. Hence, we assign cluster-level mutations to individual cells
@@ -74,7 +82,7 @@ The cells from the same clone are assumed to be same. Hence, we assign cluster-l
 pred <- do.call(rbind, lapply(pred.cluster.label$Cluster, function(cluster) {
   pred.cluster.genotype[as.character(cluster), ]
 }))
-pred.cluster.genotype[1:10,1:10]
+pred[1:10,1:10]
 ```
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
