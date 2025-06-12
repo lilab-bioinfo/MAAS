@@ -2,7 +2,7 @@
 % Please edit documentation in R/MAAS.R
 \name{MAAS}
 \alias{MAAS}
-\title{Multi-omics Association Analysis via Simultaneous NMF}
+\title{Integrating cell=cell similarities to infer consensus latent factors through self-expressive matrix factorization}
 \usage{
 MAAS(A1, A2, A3, dims)
 }
@@ -19,5 +19,5 @@ MAAS(A1, A2, A3, dims)
 List containing factorization results and parameters
 }
 \description{
-Multi-omics Association Analysis via Simultaneous NMF
+Integrating cell=cell similarities to infer consensus latent factors through self-expressive matrix factorization
 }
