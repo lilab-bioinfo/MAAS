@@ -11,20 +11,13 @@ Single-cell multimodal analysis enables highly accurate delineation of clinicall
 <p align="center">
 
 ### Installation
-Before installation, we recommend gcc 6.1 or newer in your system. The installation works well with gcc = 11.4.0 in our system.
-Use command below to check the version of gcc. If it doesn't meet the requirement, you can ask the system administrator to update the gcc.
-```
-gcc -v
-```
-
-Run the command in R
 ```
 if (!requireNamespace("devtools", quietly = T)) {
   install.packages("devtools")
 }
 devtools::install_github("Larrycpan/MAAS")
 
-# To plot the same UMAP plot, please also run install tidydr
+# To plot the small-axis UMAP plot, please also install tidydr
 install.packages("tidydr")
 ```
 
