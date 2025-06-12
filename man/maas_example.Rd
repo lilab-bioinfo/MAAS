@@ -5,11 +5,11 @@
 \alias{maas_example}
 \title{MAAS Example Dataset}
 \format{
-A list with 3 components:
+A list with 3 cell=cell similarity matrices:
 \describe{
-  \item{Peak}{Peak intensity matrix}
-  \item{CNV}{CNV matrix}
-  \item{snv}{SNV regions}
+  \item{Peak}{Chromatin accessibility modality}
+  \item{CNV}{Copy number matrix}
+  \item{SNV}{SNV modality}
 }
 }
 \source{

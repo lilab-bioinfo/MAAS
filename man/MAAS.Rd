@@ -2,7 +2,7 @@
 % Please edit documentation in R/MAAS.R
 \name{MAAS}
 \alias{MAAS}
-\title{Multimodal integration via self-expressive NMF}
+\title{Multi-omics Association Analysis via Simultaneous NMF}
 \usage{
 MAAS(A1, A2, A3, dims)
 }
@@ -19,5 +19,5 @@ MAAS(A1, A2, A3, dims)
 List containing factorization results and parameters
 }
 \description{
-Multimodal integration via self-expressive NMF
+Multi-omics Association Analysis via Simultaneous NMF
 }

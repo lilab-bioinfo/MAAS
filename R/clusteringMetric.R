@@ -1,9 +1,9 @@
 #' Calculate Clustering Quality Metric
 #'
-#' @param D Data matrix
+#' @param D Data matrix for clustering.
 #' @param clu Cluster assignments
 #' @param disMethod Distance method ("cosine", "hamming", or "euclidean")
-#' @return Combined clustering quality index
+#' @return Combined clustering quality index.
 #' @export
 clusteringMetric <- function(D, clu, disMethod = c("cosine", "hamming", "euclidean")) {
 

@@ -2,11 +2,11 @@
 #'
 #' Wxample dataset containing single-cell peaks, CNV and SNV data for integration.
 #'
-#' @format A list with 3 components:
+#' @format A list with 3 cell=cell similarity matrices:
 #' \describe{
-#'   \item{Peak}{Peak intensity matrix}
-#'   \item{CNV}{CNV matrix}
-#'   \item{snv}{SNV regions}
+#'   \item{Peak}{Chromatin accessibility modality}
+#'   \item{CNV}{Copy number matrix}
+#'   \item{SNV}{SNV modality}
 #' }
 #' @source Simulated data
 #' @examples

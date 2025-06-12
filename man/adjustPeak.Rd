@@ -7,9 +7,9 @@
 adjustPeak(pp, cc, overlapRegion, eta = 0.5)
 }
 \arguments{
-\item{pp}{Peaks}
+\item{pp}{Peak matrix with cells in columns.}
 
-\item{cc}{CNVs}
+\item{cc}{CNV matrix with cells in columns.}
 
 \item{overlapRegion}{DataFrame of overlapping regions}
 

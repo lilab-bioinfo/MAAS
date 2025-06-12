@@ -7,14 +7,14 @@
 clusteringMetric(D, clu, disMethod = c("cosine", "hamming", "euclidean"))
 }
 \arguments{
-\item{D}{Data matrix}
+\item{D}{Data matrix for clustering.}
 
 \item{clu}{Cluster assignments}
 
 \item{disMethod}{Distance method ("cosine", "hamming", or "euclidean")}
 }
 \value{
-Combined clustering quality index
+Combined clustering quality index.
 }
 \description{
 Calculate Clustering Quality Metric

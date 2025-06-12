@@ -1,7 +1,7 @@
 #' Adjust Peak Intensities Based on CNV Data
 #'
-#' @param pp Peaks
-#' @param cc CNVs
+#' @param pp Peak matrix with cells in columns.
+#' @param cc CNV matrix with cells in columns.
 #' @param overlapRegion DataFrame of overlapping regions
 #' @param eta Adjustment factor (default=0.5)
 #' @return Adjusted peak matrix
