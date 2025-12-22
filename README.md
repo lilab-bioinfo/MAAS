@@ -1,6 +1,6 @@
 ## MAAS
 ### Overview
-Single-cell multimodal analysis enables highly accurate delineation of clinically relevant tumor cell subpopulations
+Multimodal-based analysis of single-cell ATAC-seq data enables highly accurate delineation of clinically relevant tumor cell subpopulations
 
 <p align="center">
 
